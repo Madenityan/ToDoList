@@ -38,6 +38,9 @@ body {
     vertical-align: middle;
     border-radius: 5px;
     font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .list-tasks li:hover {
@@ -65,5 +68,13 @@ body {
 
 .close {
     display: block;
-    font-size: 30px;
+    font-size: 40px;
+    cursor: pointer;
+    font-weight: bold;
+    padding-left: 8px;
+    color: #3F51B5;;
+}
+
+.close:hover {
+    color: red;
 }
