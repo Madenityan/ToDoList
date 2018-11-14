@@ -52,6 +52,11 @@ body {
     background: #e1e1e1;
 }
 
+.list-tasks li:nth-child(odd):hover {
+    border-left: 4px solid blue;
+    border-left: 4px solid blue;
+}
+
 .btn-add,.form-tasks {
     display: inline-block;
     margin-bottom: 15px;
