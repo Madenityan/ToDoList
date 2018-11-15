@@ -13,12 +13,12 @@ body {
     border: none;
     vertical-align: middle;
     width: 280px;
-    border-radius: 5px;
     margin-right: 20px;
+    background-color: transparent;
 }
 
 .input-task:hover {
-    box-shadow: 1px 1px 13px 1px rgba(43,70,240,1);
+    border-bottom: 1px solid blue;
 }
 
 .list-tasks {

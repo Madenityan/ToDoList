@@ -12,7 +12,6 @@ function newElement() {
 
     document.forms[0].reset();
 
-
     if (item === '' || null) {
         alert('Add some task!');
         newItem.style.display = "none";
@@ -30,7 +29,6 @@ function onLoad() {
         document.getElementById('toDoList').appendChild(newLi);
     }
 }
-
 
 function addIcon(element) {
     let span = document.createElement("SPAN");
