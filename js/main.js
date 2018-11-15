@@ -18,6 +18,14 @@ function newElement() {
     }
 }
 
+document.body.onkeydown = function (enter) {
+    enter = enter || window.event;
+    let keyCode = enter.keyCode || enter.charCode;
+    if (keyCode === 13) {
+        newElement();
+    }
+};
+
 function onLoad() {
     let toDoList = JSON.parse(localStorage.getItem('task')) || {};
     for (let i = 0; i < Object.keys(toDoList).length; i++) {
@@ -41,8 +49,9 @@ function addIcon(element) {
 
 function removeItem(event) {
     event.target.parentElement.remove();
+
 }
 
-window.onload = ( )=> {
+window.onload = ()=> {
     onLoad();
 };
