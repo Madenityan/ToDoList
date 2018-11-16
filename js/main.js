@@ -1,15 +1,17 @@
 function newElement() {
     let item = document.getElementById('task').value;
-    let text = document.createTextNode(item);
     let newItem = document.createElement('li');
-    newItem.appendChild(text);
+    newItem.setAttribute('onclick','checkedItem(event)');
+    let textItem = document.createElement('p');
+    textItem.textContent = item;
+    newItem.appendChild(textItem);
     addIcon(newItem);
     document.getElementById('toDoList').appendChild(newItem);
+
 
     let toDoList = JSON.parse(localStorage.getItem('task')) || {};
     toDoList[Object.keys(toDoList).length]={item};
     localStorage.setItem('task', JSON.stringify(toDoList));
-
     document.forms[0].reset();
 
     if (item === '' || null) {
@@ -18,21 +20,29 @@ function newElement() {
     }
 }
 
-document.body.onkeydown = function (enter) {
-    enter = enter || window.event;
-    let keyCode = enter.keyCode || enter.charCode;
-    if (keyCode === 13) {
-        newElement();
+function checkedItem(event) {
+    if (event.target.tagName === 'P') {
+        event.target.classList.toggle('checked');
     }
-};
+}
+
+// document.body.onkeydown = function (enter) {
+//     enter = enter || window.event;
+//     let keyCode = enter.keyCode || enter.charCode;
+//     if (keyCode === 13) {
+//         newElement();
+//     }
+// };
 
 function onLoad() {
     let toDoList = JSON.parse(localStorage.getItem('task')) || {};
     for (let i = 0; i < Object.keys(toDoList).length; i++) {
         let text = toDoList[i].item;
         let newLi = document.createElement('li');
-        let newText = document.createTextNode(text);
-        newLi.appendChild(newText);
+        newLi.setAttribute('onclick','checkedItem(event)');
+        let newTextItem = document.createElement('p');
+        newTextItem.textContent = text;
+        newLi.appendChild(newTextItem );
         addIcon(newLi);
         document.getElementById('toDoList').appendChild(newLi);
     }
@@ -49,7 +59,6 @@ function addIcon(element) {
 
 function removeItem(event) {
     event.target.parentElement.remove();
-
 }
 
 window.onload = ()=> {

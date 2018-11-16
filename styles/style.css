@@ -29,6 +29,7 @@ body {
 }
 
 .list-tasks li {
+    position: relative;
     list-style-type: none;
     background-color: #ffff;
     padding: 15px;
@@ -41,6 +42,27 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    user-select: none;
+    transition: 0.2s;
+}
+
+.list-tasks li p.checked:before {
+    content: '';
+    border-color: #ff1700;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    height: 18px;
+    width: 8px;
+    position: absolute;
+    top: 33px;
+    left: 18px;;
+}
+
+.list-tasks li p.checked {
+    text-decoration: line-through;
+    color: red;
+    margin-left: 35px;
 }
 
 .list-tasks li:hover {
@@ -77,9 +99,6 @@ body {
     cursor: pointer;
     font-weight: bold;
     padding-left: 8px;
-    color: #3F51B5;;
+    color: #3F51B5;
 }
 
-.close:hover {
-    color: red;
-}
