@@ -46,7 +46,12 @@ body {
     transition: 0.2s;
 }
 
+.list-tasks li p {
+    color: black;
+}
+
 .list-tasks li p.checked:before {
+    position: absolute;
     content: '';
     border-color: #ff1700;
     border-style: solid;
@@ -54,7 +59,6 @@ body {
     transform: rotate(45deg);
     height: 18px;
     width: 8px;
-    position: absolute;
     top: 33px;
     left: 18px;;
 }
@@ -102,3 +106,6 @@ body {
     color: #3F51B5;
 }
 
+.close:hover {
+    color: red;
+}

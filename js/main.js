@@ -8,10 +8,10 @@ function newElement() {
     addIcon(newItem);
     document.getElementById('toDoList').appendChild(newItem);
 
-
     let toDoList = JSON.parse(localStorage.getItem('task')) || {};
     toDoList[Object.keys(toDoList).length]={item};
     localStorage.setItem('task', JSON.stringify(toDoList));
+
     document.forms[0].reset();
 
     if (item === '' || null) {
@@ -26,13 +26,13 @@ function checkedItem(event) {
     }
 }
 
-// document.body.onkeydown = function (enter) {
-//     enter = enter || window.event;
-//     let keyCode = enter.keyCode || enter.charCode;
-//     if (keyCode === 13) {
-//         newElement();
-//     }
-// };
+document.onkeydown = function (enter) {
+    let keyCode = enter.keyCode || enter.charCode;
+    if (keyCode === 13) {
+        event.preventDefault();
+        newElement();
+    }
+};
 
 function onLoad() {
     let toDoList = JSON.parse(localStorage.getItem('task')) || {};
