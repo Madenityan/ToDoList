@@ -8,8 +8,11 @@ function newElement() {
     addIcon(newItem);
     document.getElementById('toDoList').appendChild(newItem);
 
-    let toDoList = JSON.parse(localStorage.getItem('task')) || {};
-    toDoList[Object.keys(toDoList).length]={item};
+    let toDoList = JSON.parse(localStorage.getItem('task')) || [];
+    toDoList.push({
+        item: item,
+        isChecked: false
+    });
     localStorage.setItem('task', JSON.stringify(toDoList));
 
     document.forms[0].reset();
@@ -18,6 +21,7 @@ function newElement() {
         alert('Add some task!');
         newItem.style.display = "none";
     }
+
 }
 
 
@@ -25,6 +29,18 @@ function checkedItem(event) {
     if (event.target.tagName === 'P') {
         event.target.classList.toggle('checked');
     }
+
+    //update checked status
+    let toDoList = JSON.parse(localStorage.getItem('task')) || [];
+    let currentItemText = event.target.textContent;
+
+    for (let i = 0; i < toDoList.length; i++) {
+        if (toDoList[i] && toDoList[i].item === currentItemText) {
+            toDoList[i].isChecked = !toDoList[i].isChecked;
+        }
+    }
+
+    localStorage.setItem('task', JSON.stringify(toDoList));
 }
 
 document.onkeydown = function (enter) {
@@ -36,13 +52,16 @@ document.onkeydown = function (enter) {
 };
 
 function onLoad() {
-    let toDoList = JSON.parse(localStorage.getItem('task')) || {};
-    for (let i = 0; i < Object.keys(toDoList).length; i++) {
+    let toDoList = JSON.parse(localStorage.getItem('task')) || [];
+    for (let i = 0; i < toDoList.length; i++) {
         let text = toDoList[i].item;
         let newLi = document.createElement('li');
         newLi.setAttribute('onclick','checkedItem(event)');
         let newTextItem = document.createElement('p');
         newTextItem.textContent = text;
+        if (toDoList[i].isChecked === true) {
+            newTextItem.classList.add('checked');
+        }
         newLi.appendChild(newTextItem );
         addIcon(newLi);
         document.getElementById('toDoList').appendChild(newLi);
@@ -64,15 +83,16 @@ function removeItem(event) {
 }
 
 function removeItemInLocalStorage(event) {
-    let toDoList = JSON.parse(localStorage.getItem('task')) || {};
-    let eventLi = event.target.parentElement;
+    let toDoList = JSON.parse(localStorage.getItem('task')) || [];
+    let currentItemText = event.target.parentElement.firstChild.textContent;
 
-    for (let i = 0; i < Object.keys(toDoList).length; i++) {
-        if(toDoList[i].item ===  eventLi) {
-            localStorage.removeItem('task');
+    for (let i = 0; i < toDoList.length; i++) {
+        if (toDoList[i] && toDoList[i].item === currentItemText) {
+            toDoList.splice(i, 1);
         }
-        console.log(toDoList[i].item);
     }
+
+    localStorage.setItem('task', JSON.stringify(toDoList));
 }
 
 window.onload = ()=> {
