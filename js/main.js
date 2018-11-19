@@ -20,6 +20,7 @@ function newElement() {
     }
 }
 
+
 function checkedItem(event) {
     if (event.target.tagName === 'P') {
         event.target.classList.toggle('checked');
@@ -59,6 +60,19 @@ function addIcon(element) {
 
 function removeItem(event) {
     event.target.parentElement.remove();
+    removeItemInLocalStorage(event);
+}
+
+function removeItemInLocalStorage(event) {
+    let toDoList = JSON.parse(localStorage.getItem('task')) || {};
+    let eventLi = event.target.parentElement;
+
+    for (let i = 0; i < Object.keys(toDoList).length; i++) {
+        if(toDoList[i].item ===  eventLi) {
+            localStorage.removeItem('task');
+        }
+        console.log(toDoList[i].item);
+    }
 }
 
 window.onload = ()=> {
